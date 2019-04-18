@@ -24,6 +24,7 @@ func main() {
 	}
 }
 
+// CommandRouter is orchestra of command input
 func CommandRouter(commandStr string) error {
 
 	commandStr = strings.TrimSuffix(commandStr, "\n")
@@ -40,7 +41,10 @@ func CommandRouter(commandStr string) error {
 	case "leave":
 
 	case "status":
-
+		err := handlers.StatusParkingSlotHandler()
+		if err != nil {
+			return err
+		}
 	case "slot_numbers_for_cars_with_colour":
 
 	case "slot_number_for_registration_number":

@@ -35,3 +35,17 @@ func CreateParkingHandler(arrCommandStr []string) error {
 
 	return nil
 }
+
+// StatusParkingSlotHandler is method to handler input
+// Parameter Example =>> "status"
+func StatusParkingSlotHandler() error {
+
+	// init parking service
+	parkingService := services.NewParkingService(parkingSpace)
+
+	// call status parking (return in string)
+	resp, _ := parkingService.StatusParkingSpace()
+	fmt.Println(resp)
+
+	return nil
+}
