@@ -1,21 +1,16 @@
 # compile/install golang app shell
 
 # download dependencies
-echo "download dependencies ...."
+echo ">> download dependencies ...."
 go mod download
+echo ">> download dependencies done"
 
-# read Makefile make build == "go build -o bin/main src/main.go"
-echo "run build ...."
-make build
-
-## alternative to build go app
-# echo "run build ...."
-# go build -o bin/main src/main.go
+# run compile to binary
+echo ">> run build ...."
+go build -o bin/main src/main.go
+echo ">> run build done"
 
 # run test
-echo "run testing ...."
-make test
-
-## alternative to run test
-# echo "run testing ...."
-# go test ./..
+echo ">> run testing ...."
+go test ./...
+echo ">> run testing done"

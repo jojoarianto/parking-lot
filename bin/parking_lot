@@ -1,10 +1,4 @@
 # This variable contains absolute path of this `parking_lot` script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-# read Makefile make build == "go build -o bin/main src/main.go"
-echo "run app ...."
-make run
-
-## alternative to build go app
-# echo "run build ...."
-# go run src/main.go
+$DIR/main
