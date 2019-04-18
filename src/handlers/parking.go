@@ -110,3 +110,49 @@ func CarLeaveParkingHandler(arrCommandStr []string) error {
 
 	return nil
 }
+
+// GetPlatNoCarByColour is method to search car on parking lot by colour of car
+// Parameter Example =>> "registration_numbers_for_cars_with_colour White"
+func GetPlatNoCarByColour(arrCommandStr []string) error {
+
+	if len(arrCommandStr) < 2 {
+		return errors.New("At least 2 arguments (registration_numbers_for_cars_with_colour cars_colour)")
+	}
+
+	// init parking service
+	parkingService := services.NewParkingService(parkingSpace)
+
+	// call create parking parkingSpace with n slot
+	cars, _ := parkingService.GetCarByColour(arrCommandStr[1])
+
+	if len(cars) < 1 {
+		return errors.New("Not found")
+	}
+
+	out := ""
+
+	// print cars
+	for _, car := range cars {
+		out += fmt.Sprintf("%s, ", car.PlatNo)
+	}
+
+	// delete last ", "
+	out = DeleteLastChar(out)
+	fmt.Println(out)
+	return nil
+}
+
+// DeleteLastChar is method to delete last character with key ", "
+func DeleteLastChar(s string) string {
+	sz := len(s)
+	if sz > 0 && s[sz-1] == ' ' {
+		s = s[:sz-1]
+	}
+
+	sz = len(s)
+	if sz > 0 && s[sz-1] == ',' {
+		s = s[:sz-1]
+	}
+
+	return s
+}

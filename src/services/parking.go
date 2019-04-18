@@ -135,3 +135,23 @@ func (p *ParkingSpace) CarLeaveParking(slotNo int) (models.Parking, error) {
 	p.Parking.ParkingSlots = newParkingSlot
 	return p.Parking, nil
 }
+
+// GetCarByColour is method to search/filter car in parking area with spesific colour
+func (p *ParkingSpace) GetCarByColour(colour string) ([]models.Car, error) {
+
+	var cars []models.Car
+
+	// searching car by colour
+	for _, slot := range p.Parking.ParkingSlots {
+		if slot.ParkedCar.Colour == colour {
+			cars = append(cars, slot.ParkedCar)
+		}
+	}
+
+	// car not found
+	if len(cars) < 1 {
+		return cars, errors.New("Not found")
+	}
+
+	return cars, nil
+}
