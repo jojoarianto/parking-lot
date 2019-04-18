@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/jojoarianto/parking-lot/src/handlers"
 )
 
 func main() {
@@ -29,7 +31,10 @@ func CommandRouter(commandStr string) error {
 
 	switch arrCommandStr[0] {
 	case "create_parking_lot":
-
+		err := handlers.CreateParkingHandler(arrCommandStr)
+		if err != nil {
+			return err
+		}
 	case "park":
 
 	case "leave":
