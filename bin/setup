@@ -1,7 +1,17 @@
-# Add script to:
-# * Install dependencies
-# * Build/Compile
-# * Run Test Suit to validate
-#
-# After this is run, bin/parking_lot
-# should Just Work.
+# compile/install golang app shell
+
+# read Makefile make build == "go build -o bin/main src/main.go"
+echo "run build ...."
+make build
+
+## alternative to build go app
+# echo "run build ...."
+# go build -o bin/main src/main.go
+
+# run test
+echo "run testing ...."
+make test
+
+## alternative to run test
+# echo "run testing ...."
+# go test ./..
