@@ -40,7 +40,7 @@ func (p *ParkingSpace) CreateParkingSpace(nSlot int) (models.Parking, error) {
 	return p.Parking, nil
 }
 
-// StatusParkingSpace is method to create parking space
+// StatusParkingSpace is to return string of view state parking lot
 func (p *ParkingSpace) StatusParkingSpace() (string, error) {
 
 	// print header
@@ -109,4 +109,29 @@ func (p *ParkingSpace) CarParking(car models.Car) (models.Parking, string, error
 
 	p.Parking.ParkingSlots = newParkingSlot
 	return p.Parking, parkAtSlot, nil
+}
+
+// CarLeaveParking is method for car leave parking area
+func (p *ParkingSpace) CarLeaveParking(slotNo int) (models.Parking, error) {
+
+	var newParkingSlot []models.ParkingSlot
+
+	// searching slot_no && filtering using copy slice
+	for _, slot := range p.Parking.ParkingSlots {
+
+		if slot.SlotID == int64(slotNo) {
+
+			// re init slot
+			slot = models.ParkingSlot{
+				SlotID:    slot.SlotID,
+				NameSlot:  slot.NameSlot,
+				ParkedCar: models.Car{},
+			}
+		}
+
+		newParkingSlot = append(newParkingSlot, slot)
+	}
+
+	p.Parking.ParkingSlots = newParkingSlot
+	return p.Parking, nil
 }

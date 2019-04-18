@@ -17,6 +17,10 @@ func main() {
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
+		if len(cmdString) <= 1 {
+			// for handling empty command
+			continue
+		}
 		err = CommandRouter(cmdString)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -42,7 +46,10 @@ func CommandRouter(commandStr string) error {
 			return err
 		}
 	case "leave":
-
+		err := handlers.CarLeaveParkingHandler(arrCommandStr)
+		if err != nil {
+			return err
+		}
 	case "status":
 		err := handlers.StatusParkingSlotHandler()
 		if err != nil {

@@ -84,3 +84,29 @@ func CarParkingHandler(arrCommandStr []string) error {
 
 	return nil
 }
+
+// CarLeaveParkingHandler is method for car leave park
+// Parameter Example =>> "leave 4"
+func CarLeaveParkingHandler(arrCommandStr []string) error {
+
+	if len(arrCommandStr) < 2 {
+		return errors.New("At least 2 arguments (leave slot_no)")
+	}
+
+	slotNo, err := strconv.ParseInt(arrCommandStr[1], 10, 64)
+	if err != nil {
+		return errors.New("Parameter must be numeric")
+	}
+
+	// init parking service
+	parkingService := services.NewParkingService(parkingSpace)
+	parkingSpace, err = parkingService.CarLeaveParking(int(slotNo))
+	if err != nil {
+		return err
+	}
+
+	msg := fmt.Sprintf("Slot number %d is free", slotNo)
+	fmt.Println(msg)
+
+	return nil
+}
