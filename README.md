@@ -1,29 +1,54 @@
-# parking-lot
+# Parking Lot
 
-## lint
+Shell app to simulate parking system
 
-golint
+## Installation & Download Dependency
 
-## project structure
+```bash
+bin/setup
+```
 
-## feature
+## Run functional spec
+
+```bash
+bin/run_functional_tests
+```
+
+## Run shell App
+
+```bash
+bin/parking_lot
+```
+
+## Project Structure
+
+```
+src/
+    handlers/
+        parking.go
+    models/
+        car.go
+        parking.go
+    service/
+        parking.go
+    main.go
+go.mod
+Makefile
+```
+
+## Feature
 
 - create parking slot
 - cek status parking slot
-- new car parking
+- new car come to parking
 - car exit
 - exit command
 
-## bin
+## Checkpoint
 
-- bin/setup (compile and run test)
-- bin/parking_lot (run app)
-
-## checkpoint
-
-- unit testing
+- all feature done
 - git commit story
 - readme
 - input from typing
 - input from file
-- gui demo using gif
+- unit testing
