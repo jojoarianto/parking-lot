@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -73,4 +74,39 @@ func (p *ParkingSpace) StatusParkingSpace() (string, error) {
 	}
 
 	return str, nil
+}
+
+// CarParking is method to parking a car
+func (p *ParkingSpace) CarParking(car models.Car) (models.Parking, string, error) {
+
+	var newParkingSlot []models.ParkingSlot
+	var parkAtSlot string
+	isFoundEmptySlot := false
+
+	// no parking lot create
+	if len(p.Parking.ParkingSlots) < 1 {
+		return p.Parking, parkAtSlot, errors.New("Sorry, parking lot is unavailable")
+	}
+
+	// searching empty slot && filtering using copy slice
+	for _, slot := range p.Parking.ParkingSlots {
+
+		if !isFoundEmptySlot && slot.ParkedCar.CarID == 0 {
+
+			// empty slot is found
+			isFoundEmptySlot = true
+			slot.ParkedCar = car
+			parkAtSlot = slot.NameSlot
+		}
+
+		newParkingSlot = append(newParkingSlot, slot)
+	}
+
+	// handling not found slot
+	if !isFoundEmptySlot {
+		return p.Parking, parkAtSlot, errors.New("Sorry, parking lot is full")
+	}
+
+	p.Parking.ParkingSlots = newParkingSlot
+	return p.Parking, parkAtSlot, nil
 }

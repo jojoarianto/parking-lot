@@ -49,3 +49,38 @@ func StatusParkingSlotHandler() error {
 
 	return nil
 }
+
+// CarParkingHandler is method for park a car
+// Parameter Example =>> "park KA-01-HH-3141 Black"
+func CarParkingHandler(arrCommandStr []string) error {
+
+	if len(arrCommandStr) < 3 {
+		return errors.New("At least 3 arguments (park car_platno car_colour)")
+	}
+
+	// init parking service
+	parkingService := services.NewParkingService(parkingSpace)
+
+	carCounter++
+
+	// create a car
+	newcar := models.Car{
+		CarID:  int64(carCounter),
+		PlatNo: arrCommandStr[1],
+		Colour: arrCommandStr[2],
+	}
+
+	var err error
+	var parkAtSlot string
+
+	// call car parking method with car param
+	parkingSpace, parkAtSlot, err = parkingService.CarParking(newcar)
+	if err != nil {
+		return err
+	}
+
+	msg := fmt.Sprintf("Allocated slot number: %s", parkAtSlot)
+	fmt.Println(msg)
+
+	return nil
+}

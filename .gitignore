@@ -1,2 +1,5 @@
 # binary file
 bin/main
+
+# ignore test result
+.rspec_status

@@ -37,7 +37,10 @@ func CommandRouter(commandStr string) error {
 			return err
 		}
 	case "park":
-
+		err := handlers.CarParkingHandler(arrCommandStr)
+		if err != nil {
+			return err
+		}
 	case "leave":
 
 	case "status":
