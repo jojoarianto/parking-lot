@@ -45,7 +45,7 @@ RSpec.describe 'End To End Suite' do
     it "input from file" do
       pty = PTY.spawn("parking_lot #{File.join(File.dirname(__FILE__), '..', 'fixtures', 'file_input.txt')}")
       print 'Testing file input: '
-      expect(fetch_stdout(pty)).to eq(expected.join(''))
+      expect(fetch_stdout(pty)).to end_with(expected.join(''))
     end
 
     it "interactive input" do
