@@ -56,12 +56,15 @@ func CommandRouter(commandStr string) error {
 			return err
 		}
 	case "registration_numbers_for_cars_with_colour":
-		err := handlers.GetPlatNoCarByColour(arrCommandStr)
+		err := handlers.GetPlatNoCarByColourHandler(arrCommandStr)
 		if err != nil {
 			return err
 		}
 	case "slot_numbers_for_cars_with_colour":
-
+		err := handlers.GetSlotByCarColorHandler(arrCommandStr)
+		if err != nil {
+			return err
+		}
 	case "slot_number_for_registration_number":
 
 	case "help":
