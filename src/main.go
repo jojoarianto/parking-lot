@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 
@@ -11,7 +12,30 @@ import (
 
 func main() {
 
+	// input from file
+	if len(os.Args) > 1 {
+
+		data, err := ioutil.ReadFile(os.Args[1])
+		if err != nil {
+			fmt.Println("Can't read file:", os.Args[1])
+			panic(err)
+		}
+
+		// run per line
+		for _, line := range strings.Split(strings.TrimSuffix(string(data), "\n"), "\n") {
+
+			err = CommandRouter(line)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+			}
+		}
+
+		return
+	}
+
+	// input from typing
 	reader := bufio.NewReader(os.Stdin)
+
 	for {
 		cmdString, err := reader.ReadString('\n')
 		if err != nil {
@@ -70,8 +94,6 @@ func CommandRouter(commandStr string) error {
 		if err != nil {
 			return err
 		}
-	case "help":
-
 	case "exit":
 		os.Exit(0)
 	}
