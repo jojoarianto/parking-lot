@@ -175,3 +175,23 @@ func (p *ParkingSpace) GetSlotsByCarColour(colour string) ([]models.ParkingSlot,
 
 	return slots, nil
 }
+
+// GetSlotsByCarPlatNo is method to search/filter slot by car plat no
+func (p *ParkingSpace) GetSlotsByCarPlatNo(plat string) ([]models.ParkingSlot, error) {
+
+	var slots []models.ParkingSlot
+
+	// searching car by plat
+	for _, slot := range p.Parking.ParkingSlots {
+		if slot.ParkedCar.PlatNo == plat {
+			slots = append(slots, slot)
+		}
+	}
+
+	// slot not found
+	if len(slots) < 1 {
+		return slots, errors.New("Not found")
+	}
+
+	return slots, nil
+}

@@ -172,3 +172,34 @@ func GetSlotByCarColorHandler(arrCommandStr []string) error {
 	fmt.Println(out)
 	return nil
 }
+
+// GetSlotsByCarPlatNoHandler is method for looking slot by car plat no
+// Parameter Example =>> "slot_number_for_registration_number KA-01-HH-3141"
+func GetSlotsByCarPlatNoHandler(arrCommandStr []string) error {
+
+	if len(arrCommandStr) < 2 {
+		return errors.New("At least 2 arguments (slot_number_for_registration_number cars_plat_no)")
+	}
+
+	// init parking service
+	parkingService := services.NewParkingService(parkingSpace)
+
+	// call create parking parkingSpace with n slot
+	slots, _ := parkingService.GetSlotsByCarPlatNo(arrCommandStr[1])
+
+	if len(slots) < 1 {
+		return errors.New("Not found")
+	}
+
+	out := ""
+
+	// print slots
+	for _, slot := range slots {
+		out += fmt.Sprintf("%s, ", slot.NameSlot)
+	}
+
+	// delete last ", "
+	out = DeleteLastChar(out)
+	fmt.Println(out)
+	return nil
+}

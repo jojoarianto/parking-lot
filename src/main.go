@@ -66,7 +66,10 @@ func CommandRouter(commandStr string) error {
 			return err
 		}
 	case "slot_number_for_registration_number":
-
+		err := handlers.GetSlotsByCarPlatNoHandler(arrCommandStr)
+		if err != nil {
+			return err
+		}
 	case "help":
 
 	case "exit":

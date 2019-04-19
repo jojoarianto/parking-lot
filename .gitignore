@@ -3,3 +3,6 @@ bin/main
 
 # ignore test result
 .rspec_status
+
+# unused file
+.DS_Store
