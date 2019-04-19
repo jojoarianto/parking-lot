@@ -41,20 +41,23 @@ Makefile
 ```
 
 ## checkpoint
-[X] list feature of parking lot app
-    [x] create parking slot
-    [x] cek status parking slot
-    [X] new car come to park
-    [x] car exit / leave
-    [x] exit command
-    [X] input from typing
-    [X] input from file
-[X] git commit
-[X] readme
-[ ] unit testing
-    [X] helpers
-    [ ] handlers
-    [ ] service
+- [X] list feature of parking lot app
+    - [x] create parking slot
+    - [x] cek status parking slot
+    - [X] new car come to park
+    - [x] car exit / leave
+    - [x] search car by colour
+    - [x] search slot by car colour
+    - [x] search slot by car platno
+    - [X] input from typing
+    - [X] input from file
+    - [x] exit from app
+- [X] git commit
+- [X] readme
+- [ ] unit testing
+    - [X] helpers
+    - [ ] handlers
+    - [ ] services
 
 
 ### functional test result
